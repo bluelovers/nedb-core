@@ -268,6 +268,15 @@ describe('Model', function () {
       a[0].hello.should.equal('world');
     });
 
+    it('Should not recurse into a circular reference', function () {
+      var a = { hello: 'world' };
+      a.circular = a;
+      b = model.deepCopy(a);
+
+      b.circular.should.equal(b);
+      b.hello.should.equal('world');
+    });
+
     it('Without the strictKeys option, everything gets deep copied', function () {
       var a = { a: 4, $e: 'rrr', 'eee.rt': 42, nested: { yes: 1, 'tt.yy': 2, $nopenope: 3 }, array: [{ 'rr.hh': 1 }, { yes: true }, { $yes: false }] }
         , b = model.deepCopy(a)
