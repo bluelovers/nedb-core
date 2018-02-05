@@ -168,6 +168,21 @@ describe('Database', function () {
       });
     });
 
+    it('Can insert and get back from DB objects with circular references', function (done) {
+      var obj = { a: ['ee', 'ff', 42], subobj: { a: 'b', b: 'c' } };
+      obj.subobj.self = obj;
+
+      d.insert(obj, function (err) {
+        assert.isNull(err);
+        d.findOne({}, function (err, res) {
+          assert.isNull(err);
+          res.subobj.self.should.equal(res);
+
+          done();
+        });
+      });
+    });
+
     it('If an object returned from the DB is modified and refetched, the original value should be found', function (done) {
       d.insert({ a: 'something' }, function () {
         d.findOne({}, function (err, doc) {
