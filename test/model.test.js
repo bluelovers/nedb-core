@@ -235,6 +235,13 @@ describe('Model', function () {
       model.isPrimitiveType({ a: 42 }).should.equal(false);
     });
 
+    it('Can check circular objects without exploding', function () {
+      var obj = { a: 5, b: {}};
+      obj.b.self = obj;
+
+      model.checkObject(obj);
+    });
+
   });   // ==== End of 'Object checking' ==== //
 
 
