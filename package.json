@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "async": "latest",
+    "circular-json": "^0.5.1",
     "is": "latest",
     "localforage": "latest",
     "mkdirp": "latest",

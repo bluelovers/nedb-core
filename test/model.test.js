@@ -101,6 +101,17 @@ describe('Model', function () {
       c.test.yes.again.should.equal('yes');
     });
 
+    it('Can serialize and deserialize objects with circular references', function() {
+      var a, b, c
+        , d = 'bla';
+      a = { test: { something: 39, also: d, yes: { again: 'yes' } } };
+      a.test.circularRef = a;
+      b = model.serialize(a);
+      c = model.deserialize(b);
+      _.isEqual(a, c).should.equal(true);
+      c.test.circularRef.should.equal(c);
+    });
+
     it('Can serialize and deserialize sub arrays', function () {
       var a, b, c
         , d = new Date();
