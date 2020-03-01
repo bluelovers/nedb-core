@@ -8,7 +8,7 @@ var should = require('chai').should()
   , model = require('../lib/model')
   , Datastore = require('../lib/datastore')
   , Persistence = require('../lib/persistence')
-  , reloadTimeUpperBound = 60;   // In ms, an upper bound for the reload time used to check createdAt and updatedAt
+  , reloadTimeUpperBound = 1000;   // In ms, an upper bound for the reload time used to check createdAt and updatedAt
   ;
 
 
