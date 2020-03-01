@@ -21,13 +21,13 @@
     "url": "git@github.com:nedb3/nedb3.git"
   },
   "dependencies": {
-    "async": "^2.1.4",
-    "circular-json": "^0.5.1",
-    "events": "^1.1.1",
-    "inherits": "^2.0.3",
-    "is": "^3.2.0",
-    "localforage": "^1.4.3",
-    "lodash": "^4.17.4",
+    "async": "^3.2.0",
+    "circular-json": "^0.5.9",
+    "events": "^3.1.0",
+    "inherits": "^2.0.4",
+    "is": "^3.3.0",
+    "localforage": "^1.7.3",
+    "lodash": "^4.17.15",
     "mkdirp": "^1.0.3"
   },
   "devDependencies": {
