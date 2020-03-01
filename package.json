@@ -5,6 +5,11 @@
     "name": "Louis Chatriot",
     "email": "louis.chatriot@gmail.com"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "git diff-index HEAD --name-only | grep -q package-lock.json && echo 'package-lock.json changes detected; delete this and use yarn instead'"
+    }
+  },
   "contributors": [
     "Louis Chatriot",
     "Pooya Parsa <pooya@pi0.ir>"
@@ -31,6 +36,7 @@
     "chai": "latest",
     "commander": "latest",
     "exec-time": "latest",
+    "husky": "^4.2.3",
     "mocha": "latest",
     "request": "latest",
     "sinon": "latest"
