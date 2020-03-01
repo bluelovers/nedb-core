@@ -101,6 +101,17 @@ describe('Model', function () {
       c.test.yes.again.should.equal('yes');
     });
 
+    it('Can serialize and deserialize objects with circular references', function() {
+      var a, b, c
+        , d = 'bla';
+      a = { test: { something: 39, also: d, yes: { again: 'yes' } } };
+      a.test.circularRef = a;
+      b = model.serialize(a);
+      c = model.deserialize(b);
+      _.isEqual(a, c).should.equal(true);
+      c.test.circularRef.should.equal(c);
+    });
+
     it('Can serialize and deserialize sub arrays', function () {
       var a, b, c
         , d = new Date();
@@ -224,6 +235,13 @@ describe('Model', function () {
       model.isPrimitiveType({ a: 42 }).should.equal(false);
     });
 
+    it('Can check circular objects without exploding', function () {
+      var obj = { a: 5, b: {}};
+      obj.b.self = obj;
+
+      model.checkObject(obj);
+    });
+
   });   // ==== End of 'Object checking' ==== //
 
 
@@ -266,6 +284,15 @@ describe('Model', function () {
       b[0].hello = 'another';
       b[0].hello.should.equal('another');
       a[0].hello.should.equal('world');
+    });
+
+    it('Should not recurse into a circular reference', function () {
+      var a = { hello: 'world' };
+      a.circular = a;
+      b = model.deepCopy(a);
+
+      b.circular.should.equal(b);
+      b.hello.should.equal('world');
     });
 
     it('Without the strictKeys option, everything gets deep copied', function () {
